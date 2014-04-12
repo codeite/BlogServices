@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Convert lines to Camel case";
+}
+
+<h2>Convert lines to Camel case</h2>
+<select id="opp">
+    <option value="camel">Convert to camel case</option>
+    <option value="line-num">Add line numbers</option>
+</select>
+<hr />
+<textarea id="in" style="width: 600px; height: 200px;">Some test data</textarea>
+<hr/>
+<textarea id="out" style="width: 600px; height: 200px;"></textarea>
+<hr/>
+<input type="button" value="Convert" onclick="doConvert()"/>
+
+@section scripts
+{
+    <script>
+        function doConvert() {
+            $.post("/api/convert/" + $("#opp").val(), $("#in").val(), function (response) {
+                $("#out").val(response);
+            });
+        }
+    </script>
+}
